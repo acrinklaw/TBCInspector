@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TBC Gear Inspector
 
-## Getting Started
+A web app and companion WoW addon for looking up any TBC Anniversary character's equipped gear, stats, and GearScore.
 
-First, run the development server:
+## Web App
+
+The web frontend is built with Next.js. Search for any character by name and realm, or link directly via `/character/{realm-slug}/{name}`.
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs at `http://localhost:3000` by default.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app uses the Blizzard API and NextAuth. You'll need to configure the appropriate environment variables (see `.env.example` or your `.env.local`).
 
-## Learn More
+## WoW Addon
 
-To learn more about Next.js, take a look at the following resources:
+The companion addon adds a **"Copy Inspector URL"** option to right-click menus on player unit frames, chat names, guild roster entries, LFG listings, and more. It also supports a slash command.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy the `addon/TBCInspector` folder into your WoW AddOns directory:
 
-## Deploy on Vercel
+```
+World of Warcraft/_anniversary_/Interface/AddOns/TBCInspector/
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Or use the build script to create a zip for distribution (see below).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Usage
+
+- **Right-click any player** — a "Copy Inspector URL" menu option appears
+- **LFG Browse** — hold the configured modifier key (default: Shift) and right-click an entry
+- `/tbcinspect` — copy the Inspector URL for your current target
+- `/tbcinspect <name>` — copy the URL for a character on your realm
+- `/tbcinspect settings` — open the addon settings panel
+
+### Settings
+
+Open the addon settings via `/tbcinspect settings` or the Interface > AddOns menu. You can change which modifier key is required for the LFG Browse right-click hook (Shift, Ctrl, Alt, or None).
+
+## Building an Addon Release
+
+Run the build script to create a distributable zip:
+
+```bash
+./build-addon.sh
+```
+
+This produces `TBCInspector-<version>.zip` in the `dist/` directory, ready to upload as a release. The version is read from the `.toc` file automatically.

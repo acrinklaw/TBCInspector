@@ -1,0 +1,8 @@
+## Interface: 20505
+## Title: TBC Inspector
+## Notes: Adds a right-click menu option to copy a character's TBC Inspector URL
+## Author: Austin
+## Version: 1.1.0
+## SavedVariables: TBCInspectorDB
+
+TBCInspector.lua
