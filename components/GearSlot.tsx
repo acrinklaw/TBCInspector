@@ -1,5 +1,5 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { EquippedItem } from "@/lib/blizzard";
 import { useState } from "react";
 
@@ -101,13 +101,14 @@ export default function GearSlot({
       className={`flex items-center gap-3 border rounded-lg p-3 ${colors} ${bg} hover:brightness-125 transition-all duration-150 min-h-[72px]`}
     >
       {item.icon && !imgError ? (
-        <img
+        <Image
           src={item.icon}
           alt=""
           width={40}
           height={40}
           onError={() => setImgError(true)}
           className={`w-10 h-10 rounded ring-2 ${iconRing} shrink-0`}
+          unoptimized
         />
       ) : (
         <div className={`w-10 h-10 rounded ring-2 ${iconRing} bg-neutral-800 shrink-0 flex items-center justify-center text-neutral-500 text-lg`}>?</div>

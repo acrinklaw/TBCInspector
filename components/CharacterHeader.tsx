@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import type { CharacterProfile, PvpSummary, GearScoreResult } from "@/lib/blizzard";
 import { CLASS_COLORS } from "@/lib/class-colors";
@@ -33,13 +33,14 @@ export default function CharacterHeader({
         <div className="shrink-0">
           <div className="w-24 h-24 rounded-lg overflow-hidden ring-2 ring-amber-700/50 shadow-lg shadow-black/40">
             {avatarUrl && !avatarError ? (
-              <img
+              <Image
                 src={avatarUrl}
                 alt=""
                 width={96}
                 height={96}
                 onError={() => setAvatarError(true)}
                 className="w-full h-full object-cover"
+                unoptimized
               />
             ) : (
               <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-3xl text-neutral-600">

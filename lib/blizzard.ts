@@ -263,7 +263,11 @@ async function fetchEquipmentWithIcons(
           const tooltipData = await tooltipRes.json();
           const enriched: Partial<EquippedItem> = {};
 
-          if (tooltipData.icon) {
+          if (
+            tooltipData.icon &&
+            typeof tooltipData.icon === "string" &&
+            /^[a-z0-9_-]+$/i.test(tooltipData.icon)
+          ) {
             enriched.icon = `https://wow.zamimg.com/images/wow/icons/large/${tooltipData.icon}.jpg`;
           }
 
